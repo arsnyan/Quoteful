@@ -11,10 +11,11 @@ import Foundation
 import FactoryKit
 import FactoryTesting
 
+@Suite(.container)
 struct ZenQuoteClient_Tests {
     // MARK: - Integration Tests
     
-    @Test(.container, .tags(.integration, .requiresNetwork))
+    @Test(.tags(.integration, .requiresNetwork))
     func `fetchTodayQuote returns valid quote from real API`() async throws {
         // Given
         let client = Container.shared.quoteClient()
@@ -29,7 +30,7 @@ struct ZenQuoteClient_Tests {
         #expect(dayQuote.author.count > 0)
     }
     
-    @Test(.container, .tags(.integration, .requiresNetwork))
+    @Test(.tags(.integration, .requiresNetwork))
     func `fetchTodayQuote handles API response structure`() async throws {
         // Given
         let client = Container.shared.quoteClient()
@@ -44,7 +45,7 @@ struct ZenQuoteClient_Tests {
     
     // MARK: - Unit Tests with Stubs
     
-    @Test(.container)
+    @Test
     func `fetchTodayQuote returns when connected to internet`() async throws {
         // Given
         Container.shared.quoteClient.register {
@@ -66,7 +67,7 @@ struct ZenQuoteClient_Tests {
         #expect(!dayQuote.quote.isEmpty && !dayQuote.author.isEmpty)
     }
     
-    @Test(.container)
+    @Test
     func `fetchTodayQuote doesn't return when disconnected from internet`() async throws {
         // Given
         Container.shared.quoteClient.register {

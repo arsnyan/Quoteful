@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "73049B0C-A880-4B8B-AE20-D2F9C05B083D",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Quoteful.xcodeproj",
+        "identifier" : "2E1720012E7C77C800CC3ED8",
+        "name" : "QuotefulTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Quoteful.xcodeproj",
+        "identifier" : "2E17200B2E7C77C800CC3ED8",
+        "name" : "QuotefulUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

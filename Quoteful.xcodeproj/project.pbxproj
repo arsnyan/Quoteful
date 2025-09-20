@@ -46,6 +46,7 @@
 		2E171FF52E7C77C600CC3ED8 /* Quoteful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quoteful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E1720022E7C77C800CC3ED8 /* QuotefulTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuotefulTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E17200C2E7C77C800CC3ED8 /* QuotefulUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuotefulUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E31E1B02E7F4144009BC965 /* Quoteful.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = Quoteful.xctestplan; sourceTree = "<group>"; };
 		2E775B982E7EC78500740D9E /* Extension+Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Container.swift"; sourceTree = "<group>"; };
 		2E775B9A2E7EDB6000740D9E /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
 		2EED0D172E7DD56900503F56 /* ZenQuoteClient_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenQuoteClient_Tests.swift; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		2E171FEC2E7C77C600CC3ED8 = {
 			isa = PBXGroup;
 			children = (
+				2E31E1B02E7F4144009BC965 /* Quoteful.xctestplan */,
 				2EED0D2C2E7DD57000503F56 /* Quoteful */,
 				2EED0D1A2E7DD56900503F56 /* QuotefulTests */,
 				2EED0D1F2E7DD56D00503F56 /* QuotefulUITests */,
