@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E1720212E7C79E600CC3ED8 /* SQLiteData in Frameworks */ = {isa = PBXBuildFile; productRef = 2E1720202E7C79E600CC3ED8 /* SQLiteData */; };
-		2E1720232E7C79E600CC3ED8 /* SQLiteDataTestSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 2E1720222E7C79E600CC3ED8 /* SQLiteDataTestSupport */; };
+		2E775BB42E7EE14900740D9E /* SQLiteData in Frameworks */ = {isa = PBXBuildFile; productRef = 2E775BB32E7EE14900740D9E /* SQLiteData */; };
+		2E775BB62E7EE14900740D9E /* SQLiteDataTestSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 2E775BB52E7EE14900740D9E /* SQLiteDataTestSupport */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E1720212E7C79E600CC3ED8 /* SQLiteData in Frameworks */,
+				2E775BB42E7EE14900740D9E /* SQLiteData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,7 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E1720232E7C79E600CC3ED8 /* SQLiteDataTestSupport in Frameworks */,
+				2E775BB62E7EE14900740D9E /* SQLiteDataTestSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,7 +119,7 @@
 			);
 			name = Quoteful;
 			packageProductDependencies = (
-				2E1720202E7C79E600CC3ED8 /* SQLiteData */,
+				2E775BB32E7EE14900740D9E /* SQLiteData */,
 			);
 			productName = Quoteful;
 			productReference = 2E171FF52E7C77C600CC3ED8 /* Quoteful.app */;
@@ -143,7 +143,7 @@
 			);
 			name = QuotefulTests;
 			packageProductDependencies = (
-				2E1720222E7C79E600CC3ED8 /* SQLiteDataTestSupport */,
+				2E775BB52E7EE14900740D9E /* SQLiteDataTestSupport */,
 			);
 			productName = QuotefulTests;
 			productReference = 2E1720022E7C77C800CC3ED8 /* QuotefulTests.xctest */;
@@ -206,7 +206,7 @@
 			mainGroup = 2E171FEC2E7C77C600CC3ED8;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2E17201F2E7C79E600CC3ED8 /* XCRemoteSwiftPackageReference "sqlite-data" */,
+				2E775BB22E7EE14900740D9E /* XCRemoteSwiftPackageReference "sqlite-data" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2E171FF62E7C77C600CC3ED8 /* Products */;
@@ -625,7 +625,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2E17201F2E7C79E600CC3ED8 /* XCRemoteSwiftPackageReference "sqlite-data" */ = {
+		2E775BB22E7EE14900740D9E /* XCRemoteSwiftPackageReference "sqlite-data" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/sqlite-data.git";
 			requirement = {
@@ -636,14 +636,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2E1720202E7C79E600CC3ED8 /* SQLiteData */ = {
+		2E775BB32E7EE14900740D9E /* SQLiteData */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2E17201F2E7C79E600CC3ED8 /* XCRemoteSwiftPackageReference "sqlite-data" */;
+			package = 2E775BB22E7EE14900740D9E /* XCRemoteSwiftPackageReference "sqlite-data" */;
 			productName = SQLiteData;
 		};
-		2E1720222E7C79E600CC3ED8 /* SQLiteDataTestSupport */ = {
+		2E775BB52E7EE14900740D9E /* SQLiteDataTestSupport */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2E17201F2E7C79E600CC3ED8 /* XCRemoteSwiftPackageReference "sqlite-data" */;
+			package = 2E775BB22E7EE14900740D9E /* XCRemoteSwiftPackageReference "sqlite-data" */;
 			productName = SQLiteDataTestSupport;
 		};
 /* End XCSwiftPackageProductDependency section */
