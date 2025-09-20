@@ -6,19 +6,22 @@
 //
 
 import SwiftUI
-import SQLiteData
+import FactoryKit
+import GRDB
+import OSLog
 
 @main
 struct QuotefulApp: App {
-    init() {
-        prepareDependencies {
-            $0.defaultDatabase = try! appDatabase()
-        }
-    }
+    private let logger = Logger(subsystem: "Quoteful", category: "App Management")
+    @Injected(\.dbPool) private var dbPool
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if dbPool != nil {
+                ContentView()
+            } else {
+                Text("Failed to initialize the database. Contact developer")
+            }
         }
     }
 }

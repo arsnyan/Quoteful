@@ -6,45 +6,69 @@
 //
 
 import OSLog
-import SQLiteData
+import GRDB
+import FactoryKit
 
-nonisolated private let logger = Logger(subsystem: "Quoteful", category: "Database")
+private let logger = Logger(subsystem: "Quoteful", category: "Database")
 
-// TODO: - Finish making a table definition here
-func appDatabase() throws -> any DatabaseWriter {
-    @Dependency(\.context) var context
-    var configuration = Configuration()
+func prepareDatabaseURL() throws -> URL {
+    let fileManager = FileManager.default
+    let applicationSupportURL = try fileManager.url(
+        for: .applicationSupportDirectory,
+        in: .userDomainMask,
+        appropriateFor: nil,
+        create: true
+    )
+    let directoryURL = applicationSupportURL.appending(
+        path: "QuotefulDatabase",
+        directoryHint: .isDirectory
+    )
+    try fileManager.createDirectory(
+        at: directoryURL,
+        withIntermediateDirectories: true
+    )
+    logger.info("Created database directory")
     
-    #if DEBUG
-    configuration.prepareDatabase { db in
-        db.trace(options: .profile) {
-            if context == .preview {
-                print("\($0.expandedDescription)")
-            } else {
-                logger.debug("\($0.expandedDescription)")
-            }
-        }
+    return directoryURL.appending(
+        path: "db.sqlite"
+    )
+}
+
+func appDatabase() throws -> DatabaseWriter {
+    let databaseURL = try prepareDatabaseURL()
+    
+    var config = Configuration()
+    config.prepareDatabase { db in
+        db.trace { logger.trace("SQL> \($0)") }
     }
+    #if DEBUG
+    config.publicStatementArguments = true
     #endif
-    
-    let database = try defaultDatabase(configuration: configuration)
-    logger.info("open \(database.path)")
     
     var migrator = DatabaseMigrator()
-    #if DEBUG
-    migrator.eraseDatabaseOnSchemaChange = true
-    #endif
-    migrator.registerMigration("Create tables") { db in
-        /* Configure later
-        try #sql("""
-            CREATE TABLE "name"(
-                "id" INT NOT NULL PRIMARY KEY AUTOINCREMENT
-            ) STRICT
-            """)
-        .execute(db)
-         */
+    migrator.registerMigration("Create journalEntries") { db in
+        try db.create(table: "journalEntry") { table in
+            table.autoIncrementedPrimaryKey("id")
+            table.column("date", .datetime)
+            table.column("mood", .text)
+            table.column("text", .text)
+        }
     }
-    try migrator.migrate(database)
     
-    return database
+    let db = try DatabasePool(
+        path: databaseURL.path(percentEncoded: false),
+        configuration: config
+    )
+    try migrator.migrate(db)
+    
+    return db
+}
+
+extension Container {
+    var dbPool: Factory<DatabaseWriter?> {
+        self {
+            return try! appDatabase()
+        }
+        .shared
+    }
 }

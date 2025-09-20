@@ -8,6 +8,11 @@
 import Testing
 @testable import Quoteful
 
+extension Tag {
+    @Tag static var integration: Self
+    @Tag static var requiresNetwork: Self
+}
+
 struct QuotefulTests {
 
     @Test func example() async throws {

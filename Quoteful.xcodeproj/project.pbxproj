@@ -7,8 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E1720212E7C79E600CC3ED8 /* SQLiteData in Frameworks */ = {isa = PBXBuildFile; productRef = 2E1720202E7C79E600CC3ED8 /* SQLiteData */; };
-		2E1720232E7C79E600CC3ED8 /* SQLiteDataTestSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 2E1720222E7C79E600CC3ED8 /* SQLiteDataTestSupport */; };
+		2E775B8E2E7EBEB000740D9E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2E775B8D2E7EBEB000740D9E /* GRDB */; };
+		2E775B912E7EBF4200740D9E /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2E775B902E7EBF4200740D9E /* FactoryKit */; };
+		2E775B932E7EBF4200740D9E /* FactoryTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2E775B922E7EBF4200740D9E /* FactoryTesting */; };
+		2E775B992E7EC78500740D9E /* Extension+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E775B982E7EC78500740D9E /* Extension+Container.swift */; };
+		2E775B9B2E7EDB6000740D9E /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E775B9A2E7EDB6000740D9E /* JournalEntry.swift */; };
+		2EED0D1B2E7DD56900503F56 /* ZenQuoteClient_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D172E7DD56900503F56 /* ZenQuoteClient_Tests.swift */; };
+		2EED0D1C2E7DD56900503F56 /* QuotefulTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D192E7DD56900503F56 /* QuotefulTests.swift */; };
+		2EED0D202E7DD56D00503F56 /* QuotefulUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D1D2E7DD56D00503F56 /* QuotefulUITests.swift */; };
+		2EED0D212E7DD56D00503F56 /* QuotefulUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D1E2E7DD56D00503F56 /* QuotefulUITestsLaunchTests.swift */; };
+		2EED0D2D2E7DD57000503F56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EED0D2A2E7DD57000503F56 /* Assets.xcassets */; };
+		2EED0D2E2E7DD57000503F56 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2EED0D2B2E7DD57000503F56 /* Localizable.xcstrings */; };
+		2EED0D2F2E7DD57000503F56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D222E7DD57000503F56 /* ContentView.swift */; };
+		2EED0D302E7DD57000503F56 /* DatabaseDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D232E7DD57000503F56 /* DatabaseDefinition.swift */; };
+		2EED0D312E7DD57000503F56 /* QuotefulApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D242E7DD57000503F56 /* QuotefulApp.swift */; };
+		2EED0D322E7DD57000503F56 /* ZenQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D262E7DD57000503F56 /* ZenQuote.swift */; };
+		2EED0D332E7DD57000503F56 /* ZenQuoteClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D282E7DD57000503F56 /* ZenQuoteClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,32 +46,28 @@
 		2E171FF52E7C77C600CC3ED8 /* Quoteful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quoteful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E1720022E7C77C800CC3ED8 /* QuotefulTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuotefulTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E17200C2E7C77C800CC3ED8 /* QuotefulUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuotefulUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E775B982E7EC78500740D9E /* Extension+Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Container.swift"; sourceTree = "<group>"; };
+		2E775B9A2E7EDB6000740D9E /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
+		2EED0D172E7DD56900503F56 /* ZenQuoteClient_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenQuoteClient_Tests.swift; sourceTree = "<group>"; };
+		2EED0D192E7DD56900503F56 /* QuotefulTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotefulTests.swift; sourceTree = "<group>"; };
+		2EED0D1D2E7DD56D00503F56 /* QuotefulUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotefulUITests.swift; sourceTree = "<group>"; };
+		2EED0D1E2E7DD56D00503F56 /* QuotefulUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotefulUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2EED0D222E7DD57000503F56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2EED0D232E7DD57000503F56 /* DatabaseDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDefinition.swift; sourceTree = "<group>"; };
+		2EED0D242E7DD57000503F56 /* QuotefulApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotefulApp.swift; sourceTree = "<group>"; };
+		2EED0D262E7DD57000503F56 /* ZenQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenQuote.swift; sourceTree = "<group>"; };
+		2EED0D282E7DD57000503F56 /* ZenQuoteClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenQuoteClient.swift; sourceTree = "<group>"; };
+		2EED0D2A2E7DD57000503F56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2EED0D2B2E7DD57000503F56 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		2E171FF72E7C77C600CC3ED8 /* Quoteful */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Quoteful;
-			sourceTree = "<group>";
-		};
-		2E1720052E7C77C800CC3ED8 /* QuotefulTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = QuotefulTests;
-			sourceTree = "<group>";
-		};
-		2E17200F2E7C77C800CC3ED8 /* QuotefulUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = QuotefulUITests;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		2E171FF22E7C77C600CC3ED8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E1720212E7C79E600CC3ED8 /* SQLiteData in Frameworks */,
+				2E775B912E7EBF4200740D9E /* FactoryKit in Frameworks */,
+				2E775B8E2E7EBEB000740D9E /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E1720232E7C79E600CC3ED8 /* SQLiteDataTestSupport in Frameworks */,
+				2E775B932E7EBF4200740D9E /* FactoryTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,9 +92,9 @@
 		2E171FEC2E7C77C600CC3ED8 = {
 			isa = PBXGroup;
 			children = (
-				2E171FF72E7C77C600CC3ED8 /* Quoteful */,
-				2E1720052E7C77C800CC3ED8 /* QuotefulTests */,
-				2E17200F2E7C77C800CC3ED8 /* QuotefulUITests */,
+				2EED0D2C2E7DD57000503F56 /* Quoteful */,
+				2EED0D1A2E7DD56900503F56 /* QuotefulTests */,
+				2EED0D1F2E7DD56D00503F56 /* QuotefulUITests */,
 				2E171FF62E7C77C600CC3ED8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -97,6 +107,80 @@
 				2E17200C2E7C77C800CC3ED8 /* QuotefulUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2E775B972E7EC77C00740D9E /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				2E775B982E7EC78500740D9E /* Extension+Container.swift */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		2EED0D182E7DD56900503F56 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2EED0D172E7DD56900503F56 /* ZenQuoteClient_Tests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2EED0D1A2E7DD56900503F56 /* QuotefulTests */ = {
+			isa = PBXGroup;
+			children = (
+				2EED0D182E7DD56900503F56 /* Services */,
+				2EED0D192E7DD56900503F56 /* QuotefulTests.swift */,
+			);
+			path = QuotefulTests;
+			sourceTree = "<group>";
+		};
+		2EED0D1F2E7DD56D00503F56 /* QuotefulUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2EED0D1D2E7DD56D00503F56 /* QuotefulUITests.swift */,
+				2EED0D1E2E7DD56D00503F56 /* QuotefulUITestsLaunchTests.swift */,
+			);
+			path = QuotefulUITests;
+			sourceTree = "<group>";
+		};
+		2EED0D252E7DD57000503F56 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2EED0D222E7DD57000503F56 /* ContentView.swift */,
+				2EED0D232E7DD57000503F56 /* DatabaseDefinition.swift */,
+				2EED0D242E7DD57000503F56 /* QuotefulApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		2EED0D272E7DD57000503F56 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2EED0D262E7DD57000503F56 /* ZenQuote.swift */,
+				2E775B9A2E7EDB6000740D9E /* JournalEntry.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2EED0D292E7DD57000503F56 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2EED0D282E7DD57000503F56 /* ZenQuoteClient.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2EED0D2C2E7DD57000503F56 /* Quoteful */ = {
+			isa = PBXGroup;
+			children = (
+				2E775B972E7EC77C00740D9E /* Dependencies */,
+				2EED0D252E7DD57000503F56 /* App */,
+				2EED0D272E7DD57000503F56 /* Models */,
+				2EED0D292E7DD57000503F56 /* Services */,
+				2EED0D2A2E7DD57000503F56 /* Assets.xcassets */,
+				2EED0D2B2E7DD57000503F56 /* Localizable.xcstrings */,
+			);
+			path = Quoteful;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,12 +198,10 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				2E171FF72E7C77C600CC3ED8 /* Quoteful */,
-			);
 			name = Quoteful;
 			packageProductDependencies = (
-				2E1720202E7C79E600CC3ED8 /* SQLiteData */,
+				2E775B8D2E7EBEB000740D9E /* GRDB */,
+				2E775B902E7EBF4200740D9E /* FactoryKit */,
 			);
 			productName = Quoteful;
 			productReference = 2E171FF52E7C77C600CC3ED8 /* Quoteful.app */;
@@ -138,12 +220,9 @@
 			dependencies = (
 				2E1720042E7C77C800CC3ED8 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				2E1720052E7C77C800CC3ED8 /* QuotefulTests */,
-			);
 			name = QuotefulTests;
 			packageProductDependencies = (
-				2E1720222E7C79E600CC3ED8 /* SQLiteDataTestSupport */,
+				2E775B922E7EBF4200740D9E /* FactoryTesting */,
 			);
 			productName = QuotefulTests;
 			productReference = 2E1720022E7C77C800CC3ED8 /* QuotefulTests.xctest */;
@@ -161,9 +240,6 @@
 			);
 			dependencies = (
 				2E17200E2E7C77C800CC3ED8 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				2E17200F2E7C77C800CC3ED8 /* QuotefulUITests */,
 			);
 			name = QuotefulUITests;
 			packageProductDependencies = (
@@ -200,13 +276,14 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				ru,
+				Base,
 			);
 			mainGroup = 2E171FEC2E7C77C600CC3ED8;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2E17201F2E7C79E600CC3ED8 /* XCRemoteSwiftPackageReference "sqlite-data" */,
+				2E775B8C2E7EBEB000740D9E /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+				2E775B8F2E7EBF4200740D9E /* XCRemoteSwiftPackageReference "Factory" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2E171FF62E7C77C600CC3ED8 /* Products */;
@@ -225,6 +302,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EED0D2D2E7DD57000503F56 /* Assets.xcassets in Resources */,
+				2EED0D2E2E7DD57000503F56 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +328,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EED0D2F2E7DD57000503F56 /* ContentView.swift in Sources */,
+				2EED0D302E7DD57000503F56 /* DatabaseDefinition.swift in Sources */,
+				2EED0D312E7DD57000503F56 /* QuotefulApp.swift in Sources */,
+				2EED0D322E7DD57000503F56 /* ZenQuote.swift in Sources */,
+				2EED0D332E7DD57000503F56 /* ZenQuoteClient.swift in Sources */,
+				2E775B9B2E7EDB6000740D9E /* JournalEntry.swift in Sources */,
+				2E775B992E7EC78500740D9E /* Extension+Container.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +342,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EED0D1B2E7DD56900503F56 /* ZenQuoteClient_Tests.swift in Sources */,
+				2EED0D1C2E7DD56900503F56 /* QuotefulTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +351,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EED0D202E7DD56D00503F56 /* QuotefulUITests.swift in Sources */,
+				2EED0D212E7DD56D00503F56 /* QuotefulUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,10 +525,10 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -473,10 +563,10 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -625,26 +715,39 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2E17201F2E7C79E600CC3ED8 /* XCRemoteSwiftPackageReference "sqlite-data" */ = {
+		2E775B8C2E7EBEB000740D9E /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/sqlite-data.git";
+			repositoryURL = "https://github.com/groue/GRDB.swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		2E775B8F2E7EBF4200740D9E /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 2.5.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2E1720202E7C79E600CC3ED8 /* SQLiteData */ = {
+		2E775B8D2E7EBEB000740D9E /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2E17201F2E7C79E600CC3ED8 /* XCRemoteSwiftPackageReference "sqlite-data" */;
-			productName = SQLiteData;
+			package = 2E775B8C2E7EBEB000740D9E /* XCRemoteSwiftPackageReference "GRDB.swift" */;
+			productName = GRDB;
 		};
-		2E1720222E7C79E600CC3ED8 /* SQLiteDataTestSupport */ = {
+		2E775B902E7EBF4200740D9E /* FactoryKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2E17201F2E7C79E600CC3ED8 /* XCRemoteSwiftPackageReference "sqlite-data" */;
-			productName = SQLiteDataTestSupport;
+			package = 2E775B8F2E7EBF4200740D9E /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = FactoryKit;
+		};
+		2E775B922E7EBF4200740D9E /* FactoryTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E775B8F2E7EBF4200740D9E /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = FactoryTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
