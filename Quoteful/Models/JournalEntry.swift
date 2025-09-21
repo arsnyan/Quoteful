@@ -8,13 +8,41 @@
 import Foundation
 import GRDB
 
+enum JournalEntryValidationError: LocalizedError {
+    case emptyText
+    case futureDate
+    
+    var errorDescription: String? {
+        switch self {
+        case .emptyText:
+            "Text can't be empty."
+        case .futureDate:
+            "Date can't be in the future"
+        }
+    }
+}
+
 struct JournalEntry: Codable, FetchableRecord, PersistableRecord, Identifiable {
-    let id: Int
+    var id: Int64?
     let timestamp: Date
-    let mood: Mood
-    let text: String
+    var mood: Mood
+    var text: String
 }
 
 enum Mood: String, Codable, PersistableRecord, FetchableRecord {
     case happy, sad, neutral, confused, angry
+}
+
+// For easier displaying of all cases if changed in the future
+extension Mood: CaseIterable {}
+
+extension JournalEntry {
+    func validate() throws(JournalEntryValidationError) {
+        if timestamp > Date() {
+            throw .futureDate
+        }
+        if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            throw .emptyText
+        }
+    }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E2273272E7F470600736705 /* JournalStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2273262E7F470600736705 /* JournalStorageService.swift */; };
+		2E2273292E7F529C00736705 /* JournalStorageService_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2273282E7F529C00736705 /* JournalStorageService_Tests.swift */; };
 		2E775B8E2E7EBEB000740D9E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2E775B8D2E7EBEB000740D9E /* GRDB */; };
 		2E775B912E7EBF4200740D9E /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2E775B902E7EBF4200740D9E /* FactoryKit */; };
 		2E775B932E7EBF4200740D9E /* FactoryTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2E775B922E7EBF4200740D9E /* FactoryTesting */; };
@@ -46,7 +48,9 @@
 		2E171FF52E7C77C600CC3ED8 /* Quoteful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quoteful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E1720022E7C77C800CC3ED8 /* QuotefulTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuotefulTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E17200C2E7C77C800CC3ED8 /* QuotefulUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuotefulUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E31E1B02E7F4144009BC965 /* Quoteful.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = Quoteful.xctestplan; sourceTree = "<group>"; };
+		2E2273262E7F470600736705 /* JournalStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalStorageService.swift; sourceTree = "<group>"; };
+		2E2273282E7F529C00736705 /* JournalStorageService_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalStorageService_Tests.swift; sourceTree = "<group>"; };
+		2E31E1B02E7F4144009BC965 /* Quoteful.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Quoteful.xctestplan; sourceTree = "<group>"; };
 		2E775B982E7EC78500740D9E /* Extension+Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Container.swift"; sourceTree = "<group>"; };
 		2E775B9A2E7EDB6000740D9E /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
 		2EED0D172E7DD56900503F56 /* ZenQuoteClient_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenQuoteClient_Tests.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				2EED0D172E7DD56900503F56 /* ZenQuoteClient_Tests.swift */,
+				2E2273282E7F529C00736705 /* JournalStorageService_Tests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				2EED0D282E7DD57000503F56 /* ZenQuoteClient.swift */,
+				2E2273262E7F470600736705 /* JournalStorageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -337,6 +343,7 @@
 				2EED0D332E7DD57000503F56 /* ZenQuoteClient.swift in Sources */,
 				2E775B9B2E7EDB6000740D9E /* JournalEntry.swift in Sources */,
 				2E775B992E7EC78500740D9E /* Extension+Container.swift in Sources */,
+				2E2273272E7F470600736705 /* JournalStorageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E2273292E7F529C00736705 /* JournalStorageService_Tests.swift in Sources */,
 				2EED0D1B2E7DD56900503F56 /* ZenQuoteClient_Tests.swift in Sources */,
 				2EED0D1C2E7DD56900503F56 /* QuotefulTests.swift in Sources */,
 			);

@@ -49,16 +49,23 @@ func appDatabase() throws -> DatabaseWriter {
     migrator.registerMigration("Create journalEntries") { db in
         try db.create(table: "journalEntry") { table in
             table.autoIncrementedPrimaryKey("id")
-            table.column("date", .datetime)
+            table.column("timestamp", .datetime)
             table.column("mood", .text)
             table.column("text", .text)
         }
     }
     
-    let db = try DatabasePool(
+    let db: DatabaseWriter
+    
+    #if DEBUG
+    db = try DatabaseQueue()
+    #else
+    db = try DatabasePool(
         path: databaseURL.path(percentEncoded: false),
         configuration: config
     )
+    #endif
+    
     try migrator.migrate(db)
     
     return db
