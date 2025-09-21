@@ -21,6 +21,14 @@ extension Container: @retroactive AutoRegistering {
                     }
                 )
             }
+        
+        networkMonitor
+            .onPreview {
+                MockNetworkMonitor()
+            }
+            .onTest {
+                MockNetworkMonitor()
+            }
         #endif
     }
 }

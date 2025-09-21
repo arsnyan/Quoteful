@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2E2273272E7F470600736705 /* JournalStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2273262E7F470600736705 /* JournalStorageService.swift */; };
 		2E2273292E7F529C00736705 /* JournalStorageService_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2273282E7F529C00736705 /* JournalStorageService_Tests.swift */; };
+		2E22732C2E802E0A00736705 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E22732B2E802E0A00736705 /* HomeViewModel.swift */; };
+		2E22732E2E80445E00736705 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E22732D2E80445E00736705 /* NetworkMonitor.swift */; };
+		2E2273322E80496B00736705 /* HomeViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2273312E80496B00736705 /* HomeViewModel_Tests.swift */; };
 		2E775B8E2E7EBEB000740D9E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2E775B8D2E7EBEB000740D9E /* GRDB */; };
 		2E775B912E7EBF4200740D9E /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2E775B902E7EBF4200740D9E /* FactoryKit */; };
 		2E775B932E7EBF4200740D9E /* FactoryTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2E775B922E7EBF4200740D9E /* FactoryTesting */; };
@@ -20,7 +23,7 @@
 		2EED0D212E7DD56D00503F56 /* QuotefulUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D1E2E7DD56D00503F56 /* QuotefulUITestsLaunchTests.swift */; };
 		2EED0D2D2E7DD57000503F56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EED0D2A2E7DD57000503F56 /* Assets.xcassets */; };
 		2EED0D2E2E7DD57000503F56 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2EED0D2B2E7DD57000503F56 /* Localizable.xcstrings */; };
-		2EED0D2F2E7DD57000503F56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D222E7DD57000503F56 /* ContentView.swift */; };
+		2EED0D2F2E7DD57000503F56 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D222E7DD57000503F56 /* HomeView.swift */; };
 		2EED0D302E7DD57000503F56 /* DatabaseDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D232E7DD57000503F56 /* DatabaseDefinition.swift */; };
 		2EED0D312E7DD57000503F56 /* QuotefulApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D242E7DD57000503F56 /* QuotefulApp.swift */; };
 		2EED0D322E7DD57000503F56 /* ZenQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D262E7DD57000503F56 /* ZenQuote.swift */; };
@@ -50,6 +53,9 @@
 		2E17200C2E7C77C800CC3ED8 /* QuotefulUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuotefulUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E2273262E7F470600736705 /* JournalStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalStorageService.swift; sourceTree = "<group>"; };
 		2E2273282E7F529C00736705 /* JournalStorageService_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalStorageService_Tests.swift; sourceTree = "<group>"; };
+		2E22732B2E802E0A00736705 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		2E22732D2E80445E00736705 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		2E2273312E80496B00736705 /* HomeViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel_Tests.swift; sourceTree = "<group>"; };
 		2E31E1B02E7F4144009BC965 /* Quoteful.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Quoteful.xctestplan; sourceTree = "<group>"; };
 		2E775B982E7EC78500740D9E /* Extension+Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Container.swift"; sourceTree = "<group>"; };
 		2E775B9A2E7EDB6000740D9E /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
@@ -57,7 +63,7 @@
 		2EED0D192E7DD56900503F56 /* QuotefulTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotefulTests.swift; sourceTree = "<group>"; };
 		2EED0D1D2E7DD56D00503F56 /* QuotefulUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotefulUITests.swift; sourceTree = "<group>"; };
 		2EED0D1E2E7DD56D00503F56 /* QuotefulUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotefulUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		2EED0D222E7DD57000503F56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2EED0D222E7DD57000503F56 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2EED0D232E7DD57000503F56 /* DatabaseDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDefinition.swift; sourceTree = "<group>"; };
 		2EED0D242E7DD57000503F56 /* QuotefulApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotefulApp.swift; sourceTree = "<group>"; };
 		2EED0D262E7DD57000503F56 /* ZenQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenQuote.swift; sourceTree = "<group>"; };
@@ -115,6 +121,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2E22732A2E802DB100736705 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2EED0D222E7DD57000503F56 /* HomeView.swift */,
+				2E22732B2E802E0A00736705 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2E2273302E80495C00736705 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2E2273312E80496B00736705 /* HomeViewModel_Tests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		2E775B972E7EC77C00740D9E /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +158,7 @@
 		2EED0D1A2E7DD56900503F56 /* QuotefulTests */ = {
 			isa = PBXGroup;
 			children = (
+				2E2273302E80495C00736705 /* ViewModels */,
 				2EED0D182E7DD56900503F56 /* Services */,
 				2EED0D192E7DD56900503F56 /* QuotefulTests.swift */,
 			);
@@ -153,7 +177,6 @@
 		2EED0D252E7DD57000503F56 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				2EED0D222E7DD57000503F56 /* ContentView.swift */,
 				2EED0D232E7DD57000503F56 /* DatabaseDefinition.swift */,
 				2EED0D242E7DD57000503F56 /* QuotefulApp.swift */,
 			);
@@ -174,6 +197,7 @@
 			children = (
 				2EED0D282E7DD57000503F56 /* ZenQuoteClient.swift */,
 				2E2273262E7F470600736705 /* JournalStorageService.swift */,
+				2E22732D2E80445E00736705 /* NetworkMonitor.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -181,6 +205,7 @@
 		2EED0D2C2E7DD57000503F56 /* Quoteful */ = {
 			isa = PBXGroup;
 			children = (
+				2E22732A2E802DB100736705 /* Home */,
 				2E775B972E7EC77C00740D9E /* Dependencies */,
 				2EED0D252E7DD57000503F56 /* App */,
 				2EED0D272E7DD57000503F56 /* Models */,
@@ -336,12 +361,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EED0D2F2E7DD57000503F56 /* ContentView.swift in Sources */,
+				2EED0D2F2E7DD57000503F56 /* HomeView.swift in Sources */,
+				2E22732C2E802E0A00736705 /* HomeViewModel.swift in Sources */,
 				2EED0D302E7DD57000503F56 /* DatabaseDefinition.swift in Sources */,
 				2EED0D312E7DD57000503F56 /* QuotefulApp.swift in Sources */,
 				2EED0D322E7DD57000503F56 /* ZenQuote.swift in Sources */,
 				2EED0D332E7DD57000503F56 /* ZenQuoteClient.swift in Sources */,
 				2E775B9B2E7EDB6000740D9E /* JournalEntry.swift in Sources */,
+				2E22732E2E80445E00736705 /* NetworkMonitor.swift in Sources */,
 				2E775B992E7EC78500740D9E /* Extension+Container.swift in Sources */,
 				2E2273272E7F470600736705 /* JournalStorageService.swift in Sources */,
 			);
@@ -354,6 +381,7 @@
 				2E2273292E7F529C00736705 /* JournalStorageService_Tests.swift in Sources */,
 				2EED0D1B2E7DD56900503F56 /* ZenQuoteClient_Tests.swift in Sources */,
 				2EED0D1C2E7DD56900503F56 /* QuotefulTests.swift in Sources */,
+				2E2273322E80496B00736705 /* HomeViewModel_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

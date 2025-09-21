@@ -18,10 +18,21 @@ struct QuotefulApp: App {
     var body: some Scene {
         WindowGroup {
             if dbPool != nil {
-                ContentView()
+                HomeView()
             } else {
-                Text("Failed to initialize the database. Contact developer")
+                VStack {
+                    Text("dbInitFailed")
+                    Text("contactDevs")
+                }
             }
         }
+    }
+}
+
+// MARK: - Previewing localization values
+#Preview {
+    VStack {
+        Text("dbInitFailed")
+        Text("contactDevs")
     }
 }
