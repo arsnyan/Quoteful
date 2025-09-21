@@ -18,7 +18,7 @@ struct QuotefulApp: App {
     var body: some Scene {
         WindowGroup {
             if dbPool != nil {
-                HomeView()
+                QuotefulRootView()
             } else {
                 VStack {
                     Text("dbInitFailed")
