@@ -32,7 +32,7 @@ extension Container {
                         throw URLError(.unsupportedURL)
                     }
                     
-                    let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
+                    let request = URLRequest(url: url, cachePolicy: .reloadRevalidatingCacheData)
                     let (data, _) = try await URLSession.shared.data(for: request)
                     let decoded = try JSONDecoder().decode([ZenQuote].self, from: data)
                     
