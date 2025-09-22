@@ -15,6 +15,10 @@ struct QuotefulApp: App {
     private let logger = Logger(subsystem: "Quoteful", category: "App Management")
     @Injected(\.dbPool) private var dbPool
     
+    init() {
+        setTabBarItemColor(selected: .brown, unselected: .gray)
+    }
+    
     var body: some Scene {
         WindowGroup {
             if dbPool != nil {

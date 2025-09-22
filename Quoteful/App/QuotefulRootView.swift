@@ -55,6 +55,16 @@ struct QuotefulRootView: View {
                     }
                 }
             }
+        } else {
+            TabView {
+                ForEach(TabItem.allCases, id: \.self) { item in
+                    item.destination()
+                        .tabItem {
+                            Image(systemName: item.icon)
+                            Text(item.label)
+                        }
+                }
+            }
         }
     }
 }
