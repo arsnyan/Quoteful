@@ -16,7 +16,7 @@ struct QuotefulApp: App {
     @Injected(\.dbPool) private var dbPool
     
     init() {
-        setTabBarItemColor(selected: .brown, unselected: .gray)
+        setTabBarItemColor(selected: .beigeTab, unselected: .gray)
     }
     
     var body: some Scene {

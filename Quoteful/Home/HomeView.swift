@@ -25,6 +25,11 @@ struct HomeView: View {
                         Label("writeThoughtsPlaceholder", systemImage: "pencil.line")
                             .accessibilityHidden(true)
                     }
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 32)
+                            .stroke(lineWidth: 8)
+                            .foregroundStyle(.mutedBeige.opacity(0.6))
+                    }
                     
                     HStack {
                         ForEach(Mood.allCases, id: \.self) { mood in
