@@ -21,7 +21,7 @@ struct HomeView: View {
                     .padding([.vertical])
                 
                 SheetLikeView {
-                    MockSheetInputBox(color: Color(red: 0.96, green: 0.94, blue: 0.90)) {
+                    MockSheetInputBox(color: Color.mutedBeige) {
                         Label("writeThoughtsPlaceholder", systemImage: "pencil.line")
                             .accessibilityHidden(true)
                     }
@@ -32,7 +32,7 @@ struct HomeView: View {
                                 .accessibilityHidden(true)
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Circle().foregroundStyle(.gray.quinary))
+                                .background(Circle().foregroundStyle(.gray.tertiary))
                         }
                     }
                     .frame(maxWidth: .infinity)
@@ -125,12 +125,6 @@ fileprivate struct QuoteView: View {
 }
 
 fileprivate struct HomeGradientView: View {
-    let softCream = Color(red: 0.96, green: 0.94, blue: 0.90)
-    let mutedBeige = Color(red: 0.87, green: 0.82, blue: 0.76)
-    let offWhite = Color(red: 0.98, green: 0.97, blue: 0.95)
-    let warmTan = Color(red: 0.82, green: 0.76, blue: 0.69)
-    let lightGray = Color(red: 0.92, green: 0.92, blue: 0.92)
-    
     var body: some View {
         if #available(iOS 18.0, *) {
             MeshGradient(
@@ -142,14 +136,14 @@ fileprivate struct HomeGradientView: View {
                     [0.0, 1.0], [0.4, 1.0], [1.0, 1.0]
                 ],
                 colors: [
-                    offWhite,   softCream,  warmTan,
-                    lightGray,  mutedBeige, offWhite,
-                    softCream,  warmTan,    mutedBeige
+                    Color.offWhite,     Color.softCream,    Color.warmTan,
+                    Color.lightGray,    Color.mutedBeige,   Color.offWhite,
+                    Color.softCream,    Color.warmTan,      Color.mutedBeige
                 ]
             )
         } else {
             LinearGradient(
-                gradient: Gradient(colors: [softCream, mutedBeige]),
+                gradient: Gradient(colors: [Color.softCream, Color.mutedBeige]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
