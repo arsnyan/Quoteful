@@ -137,7 +137,7 @@ fileprivate struct HomeGradientView: View {
                 ],
                 colors: [
                     Color.offWhite,     Color.softCream,    Color.warmTan,
-                    Color.lightGray,    Color.mutedBeige,   Color.offWhite,
+                    Color.veryLightGray,    Color.mutedBeige,   Color.offWhite,
                     Color.softCream,    Color.warmTan,      Color.mutedBeige
                 ]
             )
