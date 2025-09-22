@@ -9,37 +9,117 @@ import SwiftUI
 import FactoryKit
 
 struct HomeView: View {
-    @State private var viewModel = HomeViewModel()
+    @InjectedObservable(\.homeViewModel) private var viewModel
+    @State private var sheetPresented = false
     
     var body: some View {
-        ZStack {
-            HomeGradientView()
-            
+        NavigationStack {
             VStack {
-                switch viewModel.quoteState {
-                case .loading:
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                case .success(let quote):
-                    Spacer()
-                        .frame(maxHeight: 200)
-                    Text(quote.quote)
-                        .font(.custom("Cochin-BoldItalic", size: 32))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                QuoteView(viewModel: $viewModel)
+                    .frame(maxWidth: .infinity, minHeight: 40)
+                    .padding([.horizontal], 64)
+                    .padding([.vertical])
+                
+                SheetLikeView {
+                    MockSheetInputBox(color: Color(red: 0.96, green: 0.94, blue: 0.90)) {
+                        Label("writeThoughtsPlaceholder", systemImage: "pencil.line")
+                            .accessibilityHidden(true)
+                    }
                     
-                    Text("© " + (quote.author))
-                        .font(.custom("Cochin-Italic", size: 24))
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                    Spacer()
-                case .failure(let error):
-                    Text("\(error.localizedDescription)")
+                    HStack {
+                        ForEach(Mood.allCases, id: \.self) { mood in
+                            Text(mood.emojiRepresentation)
+                                .accessibilityHidden(true)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Circle().foregroundStyle(.gray.quinary))
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .frame(minHeight: 190)
+                .onTapGesture {
+                    sheetPresented.toggle()
                 }
             }
-            .padding(64)
+            .animation(.easeInOut, value: viewModel.quoteState)
+            .sheet(isPresented: $sheetPresented) {
+                EntryDetailsView()
+            }
+            .navigationTitle("quoteOfTheDay")
+            .background(HomeGradientView().ignoresSafeArea())
         }
-        .ignoresSafeArea()
         .task {
             await viewModel.fetchQuote()
+        }
+    }
+}
+
+fileprivate struct SheetLikeView<Content: View>: View {
+    let content: Content
+    
+    init(@ViewBuilder _ content: () -> Content) {
+        self.content = content()
+    }
+    
+    var body: some View {
+        ZStack(alignment: .top) {
+            RoundedRectangle(cornerRadius: 64)
+                .frame(maxWidth: .infinity)
+                .accessibilityIdentifier("FakeSheetClickableArea")
+                .ignoresSafeArea(edges: .bottom)
+                .foregroundStyle(.background)
+                .shadow(color: .gray.opacity(0.25), radius: 10, y: -1)
+            
+            VStack(spacing: 16) {
+                content
+            }
+            .padding(32)
+        }
+    }
+}
+
+fileprivate struct MockSheetInputBox<Content: View>: View {
+    let color: Color
+    let content: Content
+    
+    init(color: Color, @ViewBuilder _ content: () -> Content) {
+        self.color = color
+        self.content = content()
+    }
+    
+    var body: some View {
+        RoundedRectangle(cornerRadius: 32)
+            .frame(maxWidth: .infinity, maxHeight: 64)
+            .foregroundStyle(color)
+            .overlay {
+                content
+            }
+    }
+}
+
+fileprivate struct QuoteView: View {
+    @Binding var viewModel: HomeViewModel
+    
+    var body: some View {
+        switch viewModel.quoteState {
+        case .loading:
+            ProgressView()
+                .progressViewStyle(.circular)
+                .transition(.opacity)
+        case .success(let quote):
+            VStack {
+                Text(quote.quote)
+                    .font(.custom("Cochin-BoldItalic", size: 32))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("© " + (quote.author))
+                    .font(.custom("Cochin-Italic", size: 24))
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            .transition(.opacity.combined(with: .scale))
+        case .failure(let errorDescription):
+            Text(errorDescription)
+                .transition(.opacity.combined(with: .scale))
         }
     }
 }

@@ -7,14 +7,16 @@
 
 import Foundation
 import FactoryKit
+import SwiftUI
 
 enum HomeQuoteState {
     case loading
-    case failure(error: Error)
+    case failure(error: String)
     case success(quote: ZenQuote)
 }
 
-@MainActor
+extension HomeQuoteState: Equatable {}
+
 @Observable
 final class HomeViewModel {
     @ObservationIgnored
@@ -26,19 +28,38 @@ final class HomeViewModel {
     var quoteState: HomeQuoteState = .loading
     
     func fetchQuote() async {
-        guard await networkMonitor.isConnected else {
-            self.quoteState = .failure(error: NetworkError.noInternetConnection)
+        if case .success = quoteState {
             return
         }
         
-        self.quoteState = .loading
+        guard await networkMonitor.isConnected else {
+            self.quoteState = .failure(
+                error: NetworkError.noInternetConnection.localizedDescription
+            )
+            return
+        }
+        
+        withAnimation(.spring(duration: 0.15, bounce: 0.1)) {
+            self.quoteState = .loading
+        }
         
         do {
             let zenQuote = try await quoteClient.fetchTodayQuote()
-            self.quoteState = .success(quote: zenQuote)
+            withAnimation(.spring(duration: 0.2, bounce: 0.1)) {
+                self.quoteState = .success(quote: zenQuote)
+            }
         } catch {
-            self.quoteState = .failure(error: error)
+            withAnimation(.spring(duration: 0.15, bounce: 0.1)) {
+                self.quoteState = .failure(error: error.localizedDescription)
+            }
         }
     }
 }
 
+extension Container {
+    var homeViewModel: Factory<HomeViewModel> {
+        self {
+            HomeViewModel()
+        }
+    }
+}

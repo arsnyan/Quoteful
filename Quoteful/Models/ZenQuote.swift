@@ -16,3 +16,5 @@ struct ZenQuote: Codable {
         case author = "a"
     }
 }
+
+extension ZenQuote: Equatable {}

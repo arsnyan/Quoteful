@@ -46,3 +46,20 @@ extension JournalEntry {
         }
     }
 }
+
+extension Mood {
+    var emojiRepresentation: String {
+        switch self {
+        case .happy:
+            "😄"
+        case .sad:
+            "😞"
+        case .neutral:
+            "🙂"
+        case .confused:
+            "😐"
+        case .angry:
+            "😠"
+        }
+    }
+}

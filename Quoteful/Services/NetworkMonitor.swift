@@ -9,7 +9,7 @@ import Foundation
 import Network
 import FactoryKit
 
-enum NetworkError: LocalizedError {
+enum NetworkError: LocalizedError, Equatable {
     case noInternetConnection
     
     var errorDescription: String? {
