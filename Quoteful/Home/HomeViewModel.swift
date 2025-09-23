@@ -25,7 +25,23 @@ final class HomeViewModel {
     @ObservationIgnored
     @Injected(\.networkMonitor) private var networkMonitor
     
-    var quoteState: HomeQuoteState = .loading
+    var quoteState: HomeQuoteState = .loading {
+        didSet {
+            switch quoteState {
+            case .failure:
+                feedbackWarning.toggle()
+            case .success:
+                feedbackSuccess.toggle()
+            default:
+                break
+            }
+        }
+    }
+    
+    var sheetPresented = false
+    
+    var feedbackWarning = false
+    var feedbackSuccess = false
     
     func fetchQuote() async {
         if case .success = quoteState {
@@ -39,20 +55,18 @@ final class HomeViewModel {
             return
         }
         
-        withAnimation(.spring(duration: 0.15, bounce: 0.1)) {
-            self.quoteState = .loading
-        }
+        self.quoteState = .loading
         
         do {
             let zenQuote = try await quoteClient.fetchTodayQuote()
-            withAnimation(.spring(duration: 0.2, bounce: 0.1)) {
-                self.quoteState = .success(quote: zenQuote)
-            }
+            self.quoteState = .success(quote: zenQuote)
         } catch {
-            withAnimation(.spring(duration: 0.15, bounce: 0.1)) {
-                self.quoteState = .failure(error: error.localizedDescription)
-            }
+            self.quoteState = .failure(error: error.localizedDescription)
         }
+    }
+    
+    func sheetTapped() {
+        sheetPresented.toggle()
     }
 }
 

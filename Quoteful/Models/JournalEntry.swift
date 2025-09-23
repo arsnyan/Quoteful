@@ -30,7 +30,7 @@ struct JournalEntry: Codable, FetchableRecord, PersistableRecord, Identifiable {
 }
 
 enum Mood: String, Codable, PersistableRecord, FetchableRecord {
-    case happy, sad, neutral, confused, angry
+    case angry, sad, confused, neutral, happy
 }
 
 // For easier displaying of all cases if changed in the future

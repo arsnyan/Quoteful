@@ -47,22 +47,10 @@ enum TabItem: CaseIterable {
 
 struct QuotefulRootView: View {
     var body: some View {
-        if #available(iOS 18.0, *) {
-            TabView {
-                ForEach(TabItem.allCases, id: \.self) { item in
-                    Tab(item.label, systemImage: item.icon) {
-                        item.destination()
-                    }
-                }
-            }
-        } else {
-            TabView {
-                ForEach(TabItem.allCases, id: \.self) { item in
+        TabView {
+            ForEach(TabItem.allCases, id: \.self) { item in
+                Tab(item.label, systemImage: item.icon) {
                     item.destination()
-                        .tabItem {
-                            Image(systemName: item.icon)
-                            Text(item.label)
-                        }
                 }
             }
         }

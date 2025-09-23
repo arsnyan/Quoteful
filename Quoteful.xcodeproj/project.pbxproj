@@ -22,6 +22,8 @@
 		2E775B992E7EC78500740D9E /* Extension+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E775B982E7EC78500740D9E /* Extension+Container.swift */; };
 		2E775B9B2E7EDB6000740D9E /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E775B9A2E7EDB6000740D9E /* JournalEntry.swift */; };
 		2E8AC01C2E8170AD00095455 /* UISetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AC01B2E8170AD00095455 /* UISetup.swift */; };
+		2E8AC0292E81CC9E00095455 /* AnimatedBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AC0282E81CC9E00095455 /* AnimatedBackgroundView.swift */; };
+		2EB4CA8A2E82D37000D44BE9 /* SkeletonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4CA892E82D37000D44BE9 /* SkeletonModifier.swift */; };
 		2EED0D1B2E7DD56900503F56 /* ZenQuoteClient_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D172E7DD56900503F56 /* ZenQuoteClient_Tests.swift */; };
 		2EED0D1C2E7DD56900503F56 /* QuotefulTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D192E7DD56900503F56 /* QuotefulTests.swift */; };
 		2EED0D202E7DD56D00503F56 /* QuotefulUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D1D2E7DD56D00503F56 /* QuotefulUITests.swift */; };
@@ -69,6 +71,8 @@
 		2E775B982E7EC78500740D9E /* Extension+Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Container.swift"; sourceTree = "<group>"; };
 		2E775B9A2E7EDB6000740D9E /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
 		2E8AC01B2E8170AD00095455 /* UISetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISetup.swift; sourceTree = "<group>"; };
+		2E8AC0282E81CC9E00095455 /* AnimatedBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedBackgroundView.swift; sourceTree = "<group>"; };
+		2EB4CA892E82D37000D44BE9 /* SkeletonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModifier.swift; sourceTree = "<group>"; };
 		2EED0D172E7DD56900503F56 /* ZenQuoteClient_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenQuoteClient_Tests.swift; sourceTree = "<group>"; };
 		2EED0D192E7DD56900503F56 /* QuotefulTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotefulTests.swift; sourceTree = "<group>"; };
 		2EED0D1D2E7DD56D00503F56 /* QuotefulUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotefulUITests.swift; sourceTree = "<group>"; };
@@ -180,6 +184,22 @@
 			path = Dependencies;
 			sourceTree = "<group>";
 		};
+		2E8AC0272E81CC8E00095455 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2E8AC0282E81CC9E00095455 /* AnimatedBackgroundView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2EB4CA882E82D36600D44BE9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2EB4CA892E82D37000D44BE9 /* SkeletonModifier.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		2EED0D182E7DD56900503F56 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +261,8 @@
 		2EED0D2C2E7DD57000503F56 /* Quoteful */ = {
 			isa = PBXGroup;
 			children = (
+				2EB4CA882E82D36600D44BE9 /* Helpers */,
+				2E8AC0272E81CC8E00095455 /* Views */,
 				2E22733A2E806D1800736705 /* EntryDetails */,
 				2E2273342E806CE000736705 /* Statistics */,
 				2E2273332E806CD900736705 /* History */,
@@ -401,10 +423,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EED0D2F2E7DD57000503F56 /* HomeView.swift in Sources */,
+				2EB4CA8A2E82D37000D44BE9 /* SkeletonModifier.swift in Sources */,
 				2E2273392E806D0700736705 /* StatisticsView.swift in Sources */,
 				2E22732C2E802E0A00736705 /* HomeViewModel.swift in Sources */,
 				2EED0D302E7DD57000503F56 /* DatabaseDefinition.swift in Sources */,
 				2EED0D312E7DD57000503F56 /* QuotefulApp.swift in Sources */,
+				2E8AC0292E81CC9E00095455 /* AnimatedBackgroundView.swift in Sources */,
 				2EED0D322E7DD57000503F56 /* ZenQuote.swift in Sources */,
 				2E2273372E806CFF00736705 /* HistoryView.swift in Sources */,
 				2EED0D332E7DD57000503F56 /* ZenQuoteClient.swift in Sources */,
@@ -593,7 +617,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -631,7 +655,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

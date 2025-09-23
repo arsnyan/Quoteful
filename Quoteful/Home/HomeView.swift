@@ -10,7 +10,6 @@ import FactoryKit
 
 struct HomeView: View {
     @InjectedObservable(\.homeViewModel) private var viewModel
-    @State private var sheetPresented = false
     
     var body: some View {
         NavigationStack {
@@ -20,142 +19,149 @@ struct HomeView: View {
                     .padding([.horizontal], 64)
                     .padding([.vertical])
                 
-                SheetLikeView {
-                    MockSheetInputBox(color: Color.mutedBeige) {
-                        Label("writeThoughtsPlaceholder", systemImage: "pencil.line")
-                            .accessibilityHidden(true)
-                    }
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 32)
-                            .stroke(lineWidth: 8)
-                            .foregroundStyle(.mutedBeige.opacity(0.6))
-                    }
-                    
-                    HStack {
-                        ForEach(Mood.allCases, id: \.self) { mood in
-                            Text(mood.emojiRepresentation)
-                                .accessibilityHidden(true)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Circle().foregroundStyle(.gray.tertiary))
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-                .frame(minHeight: 190)
-                .onTapGesture {
-                    sheetPresented.toggle()
-                }
+                SheetRectangle(color: .mutedBeige)
+                    .frame(minHeight: 190)
+                    .ignoresSafeArea(edges: .bottom)
+                    .onTapGesture { viewModel.sheetTapped() }
+                    .sensoryFeedback(.error, trigger: viewModel.feedbackWarning)
+                    .sensoryFeedback(.success, trigger: viewModel.feedbackSuccess)
             }
-            .animation(.easeInOut, value: viewModel.quoteState)
-            .sheet(isPresented: $sheetPresented) {
-                EntryDetailsView()
-            }
+            .animation(
+                .interpolatingSpring(mass: 0.9, stiffness: 260, damping: 30),
+                value: viewModel.quoteState
+            )
             .navigationTitle("quoteOfTheDay")
-            .background(HomeGradientView().ignoresSafeArea())
+            .background(
+                HomeBackgroundView(
+                    colors: [.mutedBeige, .offWhite, .softCream, .warmTan],
+                    speed: 40
+                )
+            )
+            .sheet(isPresented: $viewModel.sheetPresented) {
+                EntryDetailsView()
+                    .presentationBackground(.softCream)
+                    .presentationDragIndicator(.hidden)
+                    .presentationDetents([.fraction(0.75), .large])
+            }
         }
-        .task {
-            await viewModel.fetchQuote()
+        .onAppear {
+            Task {
+                await viewModel.fetchQuote()
+            }
         }
     }
 }
 
-fileprivate struct SheetLikeView<Content: View>: View {
-    let content: Content
-    
-    init(@ViewBuilder _ content: () -> Content) {
-        self.content = content()
-    }
+fileprivate struct SheetRectangle: View {
+    let color: Color
     
     var body: some View {
         ZStack(alignment: .top) {
             RoundedRectangle(cornerRadius: 64)
                 .frame(maxWidth: .infinity)
                 .accessibilityIdentifier("FakeSheetClickableArea")
-                .ignoresSafeArea(edges: .bottom)
                 .foregroundStyle(.background)
-                .shadow(color: .gray.opacity(0.25), radius: 10, y: -1)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 64)
+                        .stroke(lineWidth: 2)
+                        .fill(.thinMaterial)
+                        .foregroundStyle(.offWhite)
+                )
             
             VStack(spacing: 16) {
-                content
+                RoundedRectangle(cornerRadius: 32)
+                    .frame(maxWidth: .infinity, maxHeight: 64)
+                    .foregroundStyle(color)
+                    .shadow(color: .mutedBeige, radius: 8)
+                    .overlay {
+                        Label("writeThoughtsPlaceholder", systemImage: "pencil.line")
+                            .symbolEffect(
+                                .wiggle.clockwise.byLayer,
+                                options: .repeat(.periodic(delay: 4.0))
+                            )
+                            .tint(.primary)
+                    }
+                
+                HStack {
+                    ForEach(Mood.allCases, id: \.self) { mood in
+                        Text(mood.emojiRepresentation)
+                            .accessibilityHidden(true)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Circle().foregroundStyle(.gray.tertiary))
+                    }
+                }
             }
             .padding(32)
         }
     }
 }
 
-fileprivate struct MockSheetInputBox<Content: View>: View {
-    let color: Color
-    let content: Content
-    
-    init(color: Color, @ViewBuilder _ content: () -> Content) {
-        self.color = color
-        self.content = content()
-    }
+fileprivate struct HomeBackgroundView: View {
+    let colors: [Color]
+    let speed: CGFloat
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 32)
-            .frame(maxWidth: .infinity, maxHeight: 64)
-            .foregroundStyle(color)
-            .overlay {
-                content
-            }
+        ZStack {
+            AnimatedBackgroundView(
+                colors: colors,
+                speed: speed
+            )
+            .ignoresSafeArea()
+            
+            RoundedRectangle(cornerRadius: 64, style: .continuous)
+                .fill(.ultraThinMaterial)
+                .ignoresSafeArea()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 64, style: .continuous)
+                        .stroke(lineWidth: 4)
+                        .fill(.ultraThinMaterial)
+                        .ignoresSafeArea()
+                )
+        }
     }
 }
 
-fileprivate struct QuoteView: View {
+struct QuoteView: View {
     @Binding var viewModel: HomeViewModel
+    
+    @Namespace private var animation
     
     var body: some View {
         switch viewModel.quoteState {
         case .loading:
-            ProgressView()
-                .progressViewStyle(.circular)
-                .transition(.opacity)
+            VStack {
+                Text("..............................")
+                    .font(.custom("Cochin-BoldItalic", size: 32))
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .matchedGeometryEffect(id: "Author", in: animation)
+                Text("...............")
+                    .font(.custom("Cochin-Italic", size: 24))
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            .skeleton(isRedacted: true)
+            .transition(.identity)
         case .success(let quote):
             VStack {
                 Text(quote.quote)
                     .font(.custom("Cochin-BoldItalic", size: 32))
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(nil)
+                    .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .matchedGeometryEffect(id: "QuoteText", in: animation)
                 Text("© " + (quote.author))
                     .font(.custom("Cochin-Italic", size: 24))
                     .frame(maxWidth: .infinity, alignment: .trailing)
+                    .matchedGeometryEffect(id: "Author", in: animation)
             }
-            .transition(.opacity.combined(with: .scale))
+            .skeleton(isRedacted: false)
+            .transition(.identity)
         case .failure(let errorDescription):
             Text(errorDescription)
-                .transition(.opacity.combined(with: .scale))
+                .matchedGeometryEffect(id: "QuoteText", in: animation)
+                .transition(.identity)
         }
     }
-}
-
-fileprivate struct HomeGradientView: View {
-    var body: some View {
-        if #available(iOS 18.0, *) {
-            MeshGradient(
-                width: 3,
-                height: 3,
-                points: [
-                    [0.0, 0.0], [0.35, 0.0], [1.0, 0.0],
-                    [0.0, 0.55], [0.65, 0.45], [1.0, 0.5],
-                    [0.0, 1.0], [0.4, 1.0], [1.0, 1.0]
-                ],
-                colors: [
-                    Color.offWhite,     Color.softCream,    Color.warmTan,
-                    Color.veryLightGray,    Color.mutedBeige,   Color.offWhite,
-                    Color.softCream,    Color.warmTan,      Color.mutedBeige
-                ]
-            )
-        } else {
-            LinearGradient(
-                gradient: Gradient(colors: [Color.softCream, Color.mutedBeige]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        }
-    }
-}
-
-#Preview {
-    HomeView()
 }
