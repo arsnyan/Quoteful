@@ -10,6 +10,11 @@ import FactoryKit
 extension Container: @retroactive AutoRegistering {
     public func autoRegister() {
         #if DEBUG
+        dbPool
+            .onTest {
+                try? appDatabase(testEnvironment: true)
+            }
+        
         quoteClient
             .onPreview {
                 ZenQuoteClient(

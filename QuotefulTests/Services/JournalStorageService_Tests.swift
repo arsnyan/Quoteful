@@ -88,7 +88,7 @@ struct JournalStorageService_Tests {
         @Test(.tags(.integration))
         func `journalService doesn't create entry if invalid`() async throws {
             await #expect(throws: JournalEntryValidationError.self) {
-                try await journalService.createEntry(
+                try await journalService.saveEntry(
                     JournalEntry(
                         id: nil,
                         timestamp: .distantFuture,
@@ -110,7 +110,7 @@ struct JournalStorageService_Tests {
             )
             
             // When
-            let entry = try await journalService.createEntry(initialEntry)
+            let entry = try await journalService.saveEntry(initialEntry)
             
             // Then
             #expect(abs(entry.timestamp.timeIntervalSince(initialEntry.timestamp)) < 0.001)
@@ -129,11 +129,11 @@ struct JournalStorageService_Tests {
             )
             
             // When
-            var entry = try await journalService.createEntry(initialEntry)
+            var entry = try await journalService.saveEntry(initialEntry)
             let preChange = entry
             entry.text = "This is a test change of the text"
             
-            _ = try await journalService.updateEntry(entry)
+            _ = try await journalService.saveEntry(entry)
             
             // Then
             #expect(entry.id == preChange.id)
@@ -166,7 +166,7 @@ struct JournalStorageService_Tests {
             )
             
             // When
-            let entry = try await journalService.createEntry(initialEntry)
+            let entry = try await journalService.saveEntry(initialEntry)
             let preDeletion = entry
             
             let isDeleted = try await journalService.deleteEntry(entry)

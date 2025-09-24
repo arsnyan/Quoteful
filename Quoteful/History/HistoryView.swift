@@ -6,10 +6,25 @@
 //
 
 import SwiftUI
+import FactoryKit
 
 struct HistoryView: View {
+    @InjectedObservable(\.historyViewModel) private var viewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List(viewModel.entries) { entry in
+                NavigationLink {
+                    EntryDetailsView(viewModel: EntryDetailsViewModel(entry: entry))
+                } label: {
+                    Text(entry.mood.emojiRepresentation)
+                }
+            }
+            .navigationTitle("History")
+        }
+        .task {
+            await viewModel.startTrackingEntries()
+        }
     }
 }
 

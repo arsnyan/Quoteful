@@ -63,3 +63,5 @@ extension Mood {
         }
     }
 }
+
+extension JournalEntry: Equatable {}

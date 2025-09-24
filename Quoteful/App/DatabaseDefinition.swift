@@ -34,7 +34,7 @@ func prepareDatabaseURL() throws -> URL {
     )
 }
 
-func appDatabase() throws -> DatabaseWriter {
+func appDatabase(testEnvironment: Bool = false) throws -> DatabaseWriter {
     let databaseURL = try prepareDatabaseURL()
     
     var config = Configuration()
@@ -57,14 +57,14 @@ func appDatabase() throws -> DatabaseWriter {
     
     let db: DatabaseWriter
     
-    #if DEBUG
-    db = try DatabaseQueue()
-    #else
-    db = try DatabasePool(
-        path: databaseURL.path(percentEncoded: false),
-        configuration: config
-    )
-    #endif
+    if !testEnvironment {
+        db = try DatabasePool(
+            path: databaseURL.path(percentEncoded: false),
+            configuration: config
+        )
+    } else {
+        db = try DatabaseQueue()
+    }
     
     try migrator.migrate(db)
     
@@ -76,6 +76,6 @@ extension Container {
         self {
             return try! appDatabase()
         }
-        .shared
+        .singleton
     }
 }

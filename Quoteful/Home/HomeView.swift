@@ -38,7 +38,7 @@ struct HomeView: View {
                 )
             )
             .sheet(isPresented: $viewModel.sheetPresented) {
-                EntryDetailsView()
+                EntryDetailsView(viewModel: EntryDetailsViewModel())
                     .presentationBackground(.softCream)
                     .presentationDragIndicator(.hidden)
                     .presentationDetents([.fraction(0.75), .large])
