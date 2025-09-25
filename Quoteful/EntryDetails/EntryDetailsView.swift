@@ -16,6 +16,8 @@ struct EntryDetailsView: View {
     
     @Namespace private var namespace
     
+    // TODO: - test the view model and the ui layer
+    
     init(viewModel: EntryDetailsViewModel) {
         self.viewModel = viewModel
     }
@@ -37,15 +39,64 @@ struct EntryDetailsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .onTapGesture { isEditorFocused.toggle() }
             .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    Button {
+                        withAnimation(.snappy) {
+                            if viewModel.hasUnsavedChanges {
+                                viewModel.showDiscardDialog = true
+                            } else {
+                                dismiss()
+                            }
+                        }
+                    } label: {
+                        if #available(iOS 26.0, *) {
+                            Image(systemName: "chevron.left")
+                        } else {
+                            Label("back", systemImage: "chevron.left")
+                        }
+                    }
+                    .confirmationDialog(
+                        "discardChanges",
+                        isPresented: $viewModel.showDiscardDialog,
+                        titleVisibility: .visible
+                    ) {
+                        Button("Discard", role: .destructive) { dismiss() }
+                        Button("Cancel", role: .cancel) { }
+                    } message: {
+                        Text("hasUnsavedChanges")
+                    }
+                }
+                
                 ToolbarItem(placement: .topBarTrailing) {
                     switch viewModel.state {
                     case .editing(let data):
-                        SaveButton(data: data)
+                        SaveButton(data: data) {
+                            Task {
+                                await viewModel.saveEntry {
+                                    dismiss()
+                                } animatableHandler: {
+                                    withAnimation(.easeInOut) {
+                                        viewModel.toggleEditMode()
+                                    }
+                                }
+                            }
+                        }
                     case .viewing:
-                        StartEditingButton()
+                        StartEditingButton() {
+                            withAnimation(.easeInOut) {
+                                viewModel.toggleEditMode()
+                            }
+                        }
                     }
                 }
             }
+            .navigationBarBackButtonHidden()
+        }
+        .onAppear {
+            viewModel.resetToViewingState()
+        }
+        .onDisappear {
+            viewModel.resetToViewingState()
         }
         .interactiveDismissDisabled(!viewModel.isDismissable)
     }
@@ -64,49 +115,23 @@ struct EntryDetailsView: View {
         }
     }
     
-    @ViewBuilder private func SaveButton(data: EntryDetailsViewModelEditingData) -> some View {
+    @ViewBuilder private func SaveButton(data: EntryDetailsViewModelEditingData, action: @escaping () -> Void) -> some View {
         if #available(iOS 26.0, *) {
-            Button(role: .confirm) {
-                Task {
-                    await viewModel.saveEntry {
-                        dismiss()
-                    } animatableHandler: {
-                        withAnimation(.easeInOut) {
-                            viewModel.toggleEditMode()
-                        }
-                    }
-                }
-            }
-            .sensoryFeedback(.error, trigger: data.savingError)
+            Button(role: .confirm, action: action)
+                .sensoryFeedback(.error, trigger: data.savingError)
         } else {
-            Button("save") {
-                Task {
-                    await viewModel.saveEntry {
-                        dismiss()
-                    } animatableHandler: {
-                        withAnimation(.easeInOut) {
-                            viewModel.toggleEditMode()
-                        }
-                    }
-                }
-            }
-            .sensoryFeedback(.error, trigger: data.savingError)
+            Button("save", action: action)
+                .sensoryFeedback(.error, trigger: data.savingError)
         }
     }
     
-    @ViewBuilder private func StartEditingButton() -> some View {
+    @ViewBuilder private func StartEditingButton(action: @escaping () -> Void) -> some View {
         if #available(iOS 26.0, *) {
-            Button {
-                withAnimation(.easeInOut) {
-                    viewModel.toggleEditMode()
-                }
-            } label: {
+            Button(action: action) {
                 Image(systemName: "pencil")
             }
         } else {
-            Button("edit") {
-                viewModel.toggleEditMode()
-            }
+            Button("edit", action: action)
         }
     }
 }
@@ -126,7 +151,9 @@ private struct EditingEntry: View {
                 } label: {
                     Text(mood.emojiRepresentation)
                         .font(.largeTitle)
-                        .accessibilityHidden(true)
+                        .accessibilityLabel(mood.emojiRepresentation)
+                        .accessibilityHint("emojiSelectionHint")
+                        .accessibilityAddTraits(.isButton)
                         .frame(maxWidth: .infinity)
                         .background {
                             if viewModel.selectedMood == mood {
@@ -148,18 +175,37 @@ private struct EditingEntry: View {
                 .textEditorStyle(.plain)
                 .contentMargins(.horizontal, 16)
                 .contentMargins(.vertical, 12)
+                .accessibilityLabel("editEntryTextAccessibilityLabel")
                 .background(
                     RoundedRectangle(cornerRadius: 32)
                         .foregroundStyle(.mutedBeige)
+                        .accessibilityHidden(true)
                 )
+                .offset(x: viewModel.savingError ? 20 : 0)
                 .sensoryFeedback(.error, trigger: viewModel.textEmptyError)
+                .onChange(of: viewModel.savingError) { _, newValue in
+                    if newValue {
+                        withAnimation(.spring(response: 0.2, dampingFraction: 0.2, blendDuration: 0.2)) {
+                            viewModel.savingError = false
+                        }
+                    }
+                }
             
             if viewModel.textInput.isEmpty, viewModel.textEmptyError {
-                Text("Text field should not be empty")
+                Text("textEmptyError")
                     .font(.caption)
                     .foregroundStyle(.red)
                     .transition(.move(edge: .top).combined(with: .opacity))
                     .padding(.horizontal)
+                    .accessibilityHint("errorHintAccessibility")
+                    .offset(x: viewModel.shakeTextEmpty ? 20 : 0)
+                    .onChange(of: viewModel.shakeTextEmpty) { _, newValue in
+                        if newValue {
+                            withAnimation(.spring(response: 0.2, dampingFraction: 0.2, blendDuration: 0.2)) {
+                                viewModel.shakeTextEmpty = false
+                            }
+                        }
+                    }
             }
         }
         .animation(.spring(duration: 0.5, bounce: 0.2), value: viewModel.textEmptyError)
@@ -175,34 +221,45 @@ private struct ViewingEntry: View {
         HStack {
             Text(entry.mood.emojiRepresentation)
                 .font(.largeTitle)
+                .accessibilityLabel("entrySelectedMoodAccessibilityLabel")
                 .matchedGeometryEffect(id: entry.mood.emojiRepresentation, in: namespace)
             
             VStack {
                 Text(entry.timestamp, style: .date)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.headline)
+                    .accessibilityLabel("entryDateAccessibilityLabel")
                 Text(entry.timestamp, style: .time)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundStyle(.secondary)
                     .font(.footnote)
+                    .accessibilityLabel("entryTimeAccessibilityLabel")
             }
         }
         
-        TextEditor(text: .constant(entry.text))
-            .textEditorStyle(.plain)
-            .contentMargins(.horizontal, 16)
-            .contentMargins(.vertical, 12)
-            .background(
-                RoundedRectangle(cornerRadius: 32)
-                    .foregroundStyle(.mutedBeige)
-            )
+        ScrollView {
+            Text(entry.text)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityHint("entryTextAccessibilityLabel")
+        }
+        .textEditorStyle(.plain)
+        .contentMargins(.horizontal, 21)
+        .contentMargins(.vertical, 8)
+        .background(
+            RoundedRectangle(cornerRadius: 32)
+                .foregroundStyle(.mutedBeige)
+        )
     }
 }
 
 #Preview {
     EntryDetailsView(
         viewModel: EntryDetailsViewModel(
-            entry: JournalEntry(timestamp: .now, mood: .angry, text: "Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros")
+            entry: JournalEntry(
+                timestamp: .now,
+                mood: .confused,
+                text: "Test"
+            )
         )
     )
 }

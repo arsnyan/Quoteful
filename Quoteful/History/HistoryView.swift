@@ -16,11 +16,12 @@ struct HistoryView: View {
             List(viewModel.entries) { entry in
                 NavigationLink {
                     EntryDetailsView(viewModel: EntryDetailsViewModel(entry: entry))
+                        .id(entry.id)
                 } label: {
                     Text(entry.mood.emojiRepresentation)
                 }
             }
-            .navigationTitle("History")
+            .navigationTitle("history")
         }
         .task {
             await viewModel.startTrackingEntries()

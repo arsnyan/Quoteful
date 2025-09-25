@@ -13,7 +13,8 @@ final class EntryDetailsViewModelEditingData {
     // MARK: - UI Properties
     var textInput = "" {
         didSet {
-            if !textInput.isEmpty, textEmptyError {
+            if !textInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+               textEmptyError {
                 textEmptyError.toggle()
             }
         }
@@ -22,12 +23,19 @@ final class EntryDetailsViewModelEditingData {
     
     // MARK: - Navigation Properties
     var isViewDismissable: Bool {
-        return textInput.isEmpty
+        return textInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
     // MARK: - Error UI Properties
     var savingError = false // for both alert, wiggle and feedback
-    var textEmptyError = false
+    var textEmptyError = false {
+        willSet {
+            if textEmptyError, newValue == textEmptyError {
+                shakeTextEmpty = true
+            }
+        }
+    }
+    var shakeTextEmpty = false
     
     // MARK: - Alert Properties
     var alertDateIsInFuture = false
@@ -64,7 +72,7 @@ class EntryDetailsViewModel {
     @ObservationIgnored
     @Injected(\.journalService) private var journalService
     
-    private var entry: JournalEntry? = nil
+    private(set) var entry: JournalEntry? = nil
     
     var state: EntryState
     
@@ -85,6 +93,15 @@ class EntryDetailsViewModel {
             String(localized: "details")
         }
     }
+    
+    var hasUnsavedChanges: Bool {
+        guard case .editing(let data) = state,
+              !data.textInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+              let entry else { return false }
+        return data.textInput != entry.text || data.selectedMood != entry.mood
+    }
+    
+    var showDiscardDialog = false
     
     init(entry: JournalEntry?, isEditing: Bool) {
         if entry == nil, !isEditing {
@@ -108,6 +125,13 @@ class EntryDetailsViewModel {
         self.init(entry: entry, isEditing: false)
     }
     
+    // That's a bit different from toggleEditMode as it changes
+    // to .viewing no matter the current state
+    func resetToViewingState() {
+        guard let entry else { return }
+        state = .viewing(entry: entry)
+    }
+    
     func toggleEditMode() {
         guard let entry else { return }
         switch state {
@@ -119,14 +143,16 @@ class EntryDetailsViewModel {
     }
     
     func saveEntry(completion: () -> Void, animatableHandler: (() -> Void)? = nil) async {
+        let initialEntry = entry
+        
         if case .editing(let data) = state {
             do {
-                if var entry {
-                    entry.text = data.textInput
-                    entry.mood = data.selectedMood
+                if var editedEntry = self.entry {
+                    editedEntry.text = data.textInput
+                    editedEntry.mood = data.selectedMood
                     
-                    try entry.validate()
-                    self.entry = try await journalService.saveEntry(entry)
+                    try editedEntry.validate()
+                    self.entry = try await journalService.saveEntry(editedEntry)
                     animatableHandler?()
                 } else {
                     let newEntry = JournalEntry(
@@ -147,10 +173,10 @@ class EntryDetailsViewModel {
                     data.alertDateIsInFuture = true
                 }
                 
-                entry = nil
+                entry = initialEntry
             } catch {
                 data.savingError.toggle()
-                entry = nil
+                entry = initialEntry
             }
         }
     }

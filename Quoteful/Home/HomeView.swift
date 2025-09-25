@@ -59,6 +59,9 @@ fileprivate struct SheetRectangle: View {
         ZStack(alignment: .top) {
             RoundedRectangle(cornerRadius: 64)
                 .frame(maxWidth: .infinity)
+                .accessibilityHint("openSheetCreateEntryHint")
+                .accessibilityLabel("clickableAreaAccessibilityLabel")
+                .accessibilityAddTraits(.isButton)
                 .accessibilityIdentifier("FakeSheetClickableArea")
                 .foregroundStyle(.background)
                 .overlay(
@@ -80,6 +83,7 @@ fileprivate struct SheetRectangle: View {
                                 options: .repeat(.periodic(delay: 4.0))
                             )
                             .tint(.primary)
+                            .accessibilityHidden(true)
                     }
                 
                 HStack {

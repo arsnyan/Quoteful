@@ -24,6 +24,8 @@
 		2E775B9B2E7EDB6000740D9E /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E775B9A2E7EDB6000740D9E /* JournalEntry.swift */; };
 		2E8AC01C2E8170AD00095455 /* UISetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AC01B2E8170AD00095455 /* UISetup.swift */; };
 		2E8AC0292E81CC9E00095455 /* AnimatedBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AC0282E81CC9E00095455 /* AnimatedBackgroundView.swift */; };
+		2E8D4B652E858914007A90B8 /* EntryDetailsViewModelEditingData_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8D4B642E858914007A90B8 /* EntryDetailsViewModelEditingData_Tests.swift */; };
+		2E8D4B672E85903D007A90B8 /* EntryDetailsViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8D4B662E85903D007A90B8 /* EntryDetailsViewModel_Tests.swift */; };
 		2EB4CA8A2E82D37000D44BE9 /* SkeletonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4CA892E82D37000D44BE9 /* SkeletonModifier.swift */; };
 		2EB4CA8C2E82F8CA00D44BE9 /* EntryDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4CA8B2E82F8CA00D44BE9 /* EntryDetailsViewModel.swift */; };
 		2EED0D1B2E7DD56900503F56 /* ZenQuoteClient_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D172E7DD56900503F56 /* ZenQuoteClient_Tests.swift */; };
@@ -75,6 +77,8 @@
 		2E775B9A2E7EDB6000740D9E /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
 		2E8AC01B2E8170AD00095455 /* UISetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISetup.swift; sourceTree = "<group>"; };
 		2E8AC0282E81CC9E00095455 /* AnimatedBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedBackgroundView.swift; sourceTree = "<group>"; };
+		2E8D4B642E858914007A90B8 /* EntryDetailsViewModelEditingData_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsViewModelEditingData_Tests.swift; sourceTree = "<group>"; };
+		2E8D4B662E85903D007A90B8 /* EntryDetailsViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsViewModel_Tests.swift; sourceTree = "<group>"; };
 		2EB4CA892E82D37000D44BE9 /* SkeletonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModifier.swift; sourceTree = "<group>"; };
 		2EB4CA8B2E82F8CA00D44BE9 /* EntryDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsViewModel.swift; sourceTree = "<group>"; };
 		2EED0D172E7DD56900503F56 /* ZenQuoteClient_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenQuoteClient_Tests.swift; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				2E2273312E80496B00736705 /* HomeViewModel_Tests.swift */,
+				2E8D4B642E858914007A90B8 /* EntryDetailsViewModelEditingData_Tests.swift */,
+				2E8D4B662E85903D007A90B8 /* EntryDetailsViewModel_Tests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -454,10 +460,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E8D4B672E85903D007A90B8 /* EntryDetailsViewModel_Tests.swift in Sources */,
 				2E2273292E7F529C00736705 /* JournalStorageService_Tests.swift in Sources */,
 				2EED0D1B2E7DD56900503F56 /* ZenQuoteClient_Tests.swift in Sources */,
 				2EED0D1C2E7DD56900503F56 /* QuotefulTests.swift in Sources */,
 				2E2273322E80496B00736705 /* HomeViewModel_Tests.swift in Sources */,
+				2E8D4B652E858914007A90B8 /* EntryDetailsViewModelEditingData_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,7 +713,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Quoteful.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Quoteful";
 			};
@@ -731,7 +739,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Quoteful.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Quoteful";
 			};
