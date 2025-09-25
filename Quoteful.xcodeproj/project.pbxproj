@@ -39,6 +39,7 @@
 		2EED0D312E7DD57000503F56 /* QuotefulApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D242E7DD57000503F56 /* QuotefulApp.swift */; };
 		2EED0D322E7DD57000503F56 /* ZenQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D262E7DD57000503F56 /* ZenQuote.swift */; };
 		2EED0D332E7DD57000503F56 /* ZenQuoteClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED0D282E7DD57000503F56 /* ZenQuoteClient.swift */; };
+		2EFD3B482E85CA9600AB1DE4 /* EntryDetailsView_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFD3B472E85CA9600AB1DE4 /* EntryDetailsView_UITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		2EED0D282E7DD57000503F56 /* ZenQuoteClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenQuoteClient.swift; sourceTree = "<group>"; };
 		2EED0D2A2E7DD57000503F56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EED0D2B2E7DD57000503F56 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		2EFD3B472E85CA9600AB1DE4 /* EntryDetailsView_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsView_UITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,7 @@
 			children = (
 				2EED0D1D2E7DD56D00503F56 /* QuotefulUITests.swift */,
 				2EED0D1E2E7DD56D00503F56 /* QuotefulUITestsLaunchTests.swift */,
+				2EFD3B472E85CA9600AB1DE4 /* EntryDetailsView_UITests.swift */,
 			);
 			path = QuotefulUITests;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EED0D202E7DD56D00503F56 /* QuotefulUITests.swift in Sources */,
+				2EFD3B482E85CA9600AB1DE4 /* EntryDetailsView_UITests.swift in Sources */,
 				2EED0D212E7DD56D00503F56 /* QuotefulUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -51,10 +51,14 @@ struct EntryDetailsView: View {
                     } label: {
                         if #available(iOS 26.0, *) {
                             Image(systemName: "chevron.left")
+                                .accessibilityHidden(true)
                         } else {
                             Label("back", systemImage: "chevron.left")
+                                .accessibilityHidden(true)
                         }
                     }
+                    .accessibilityLabel("back")
+                    .accessibilityIdentifier("BackButton")
                     .confirmationDialog(
                         "discardChanges",
                         isPresented: $viewModel.showDiscardDialog,
@@ -81,6 +85,7 @@ struct EntryDetailsView: View {
                                 }
                             }
                         }
+                        .accessibilityIdentifier("SaveButton")
                     case .viewing:
                         StartEditingButton() {
                             withAnimation(.easeInOut) {
@@ -107,11 +112,13 @@ struct EntryDetailsView: View {
                 .stroke(lineWidth: 4)
                 .fill(.thinMaterial)
                 .ignoresSafeArea()
+                .accessibilityHidden(true)
         } else {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(lineWidth: 4)
                 .fill(.thinMaterial)
                 .ignoresSafeArea()
+                .accessibilityHidden(true)
         }
     }
     
@@ -145,7 +152,7 @@ private struct EditingEntry: View {
     
     var body: some View {
         HStack {
-            ForEach(Mood.allCases, id: \.self) { mood in
+            ForEach(Array(Mood.allCases.enumerated()), id: \.offset) { index, mood in
                 Button {
                     viewModel.selectedMood = mood
                 } label: {
@@ -154,6 +161,7 @@ private struct EditingEntry: View {
                         .accessibilityLabel(mood.emojiRepresentation)
                         .accessibilityHint("emojiSelectionHint")
                         .accessibilityAddTraits(.isButton)
+                        .accessibilityIdentifier("emoji\(index)")
                         .frame(maxWidth: .infinity)
                         .background {
                             if viewModel.selectedMood == mood {
@@ -175,6 +183,7 @@ private struct EditingEntry: View {
                 .textEditorStyle(.plain)
                 .contentMargins(.horizontal, 16)
                 .contentMargins(.vertical, 12)
+                .accessibilityIdentifier("EntryTextEditor")
                 .accessibilityLabel("editEntryTextAccessibilityLabel")
                 .background(
                     RoundedRectangle(cornerRadius: 32)
@@ -198,6 +207,7 @@ private struct EditingEntry: View {
                     .transition(.move(edge: .top).combined(with: .opacity))
                     .padding(.horizontal)
                     .accessibilityHint("errorHintAccessibility")
+                    .accessibilityIdentifier("ContextualErrorMsg")
                     .offset(x: viewModel.shakeTextEmpty ? 20 : 0)
                     .onChange(of: viewModel.shakeTextEmpty) { _, newValue in
                         if newValue {
@@ -221,7 +231,9 @@ private struct ViewingEntry: View {
         HStack {
             Text(entry.mood.emojiRepresentation)
                 .font(.largeTitle)
-                .accessibilityLabel("entrySelectedMoodAccessibilityLabel")
+                .accessibilityLabel(entry.mood.emojiRepresentation)
+                .accessibilityIdentifier(entry.mood.emojiRepresentation)
+                .accessibilityHint("entrySelectedMoodAccessibilityLabel")
                 .matchedGeometryEffect(id: entry.mood.emojiRepresentation, in: namespace)
             
             VStack {

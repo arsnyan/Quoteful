@@ -5,6 +5,7 @@
 //  Created by Арсен Саруханян on 20.09.2025.
 //
 
+import Foundation
 import FactoryKit
 
 extension Container: @retroactive AutoRegistering {
@@ -14,6 +15,7 @@ extension Container: @retroactive AutoRegistering {
             .onTest {
                 try? appDatabase(testEnvironment: true)
             }
+            .onArg("mock_empty_db") { try? appDatabase(testEnvironment: true) }
         
         quoteClient
             .onPreview {
