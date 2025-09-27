@@ -15,12 +15,14 @@ final class QuotefulUITests: XCTestCase {
     @MainActor
     func testSheetOpensOnHomePageWhenInputBoxIsClicked() throws {
         let app = XCUIApplication()
+        app.launchArguments.append("mock_empty_db")
+        app.launch()
         app.activate()
         
-        let sheetArea = app.otherElements["FakeSheetClickableArea"]
+        let sheetArea = app.buttons["FakeSheetClickableArea"]
         sheetArea.tap()
         
-        let openedSheet = app.navigationBars["Entry Details"]
+        let openedSheet = app.navigationBars["Write down your thoughts"]
         XCTAssert(openedSheet.exists)
     }
 }

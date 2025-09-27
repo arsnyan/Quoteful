@@ -12,9 +12,9 @@ extension Container: @retroactive AutoRegistering {
     public func autoRegister() {
         #if DEBUG
         dbPool
-            .onTest {
-                try? appDatabase(testEnvironment: true)
-            }
+            .onTest { try? appDatabase(testEnvironment: true) }
+        
+        dbPool
             .onArg("mock_empty_db") { try? appDatabase(testEnvironment: true) }
         
         quoteClient

@@ -23,6 +23,7 @@ struct QuotefulApp: App {
         WindowGroup {
             if dbPool != nil {
                 QuotefulRootView()
+                    .environment(\.isUITesting, ProcessInfo.processInfo.arguments.contains("mock_ui"))
             } else {
                 VStack {
                     Text("dbInitFailed")
@@ -30,6 +31,17 @@ struct QuotefulApp: App {
                 }
             }
         }
+    }
+}
+
+private struct IsUITestingKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+extension EnvironmentValues {
+    var isUITesting: Bool {
+        get { self[IsUITestingKey.self] }
+        set { self[IsUITestingKey.self] = newValue }
     }
 }
 

@@ -15,6 +15,11 @@ import GRDB
 @Suite
 @MainActor
 struct EntryDetailsViewModel_Tests {
+    init() {
+        Container.shared.dbPool.reset()
+        Container.shared.dbPool.onTest { try? appDatabase(testEnvironment: true) }
+    }
+    
     @Test(
         arguments: [
             nil,

@@ -92,6 +92,8 @@ struct EntryDetailsView: View {
                                 viewModel.toggleEditMode()
                             }
                         }
+                        .accessibilityIdentifier("EditButton")
+                        .accessibilityLabel("editButton")
                     }
                 }
             }
@@ -144,6 +146,8 @@ struct EntryDetailsView: View {
 }
 
 private struct EditingEntry: View {
+    @Environment(\.isUITesting) private var isUITesting
+    
     @Bindable var viewModel: EntryDetailsViewModelEditingData
     
     @FocusState.Binding var isEditorFocused: Bool
@@ -180,6 +184,7 @@ private struct EditingEntry: View {
         VStack(alignment: .leading) {
             TextEditor(text: $viewModel.textInput)
                 .focused($isEditorFocused)
+                .autocorrectionDisabled(isUITesting)
                 .textEditorStyle(.plain)
                 .contentMargins(.horizontal, 16)
                 .contentMargins(.vertical, 12)
