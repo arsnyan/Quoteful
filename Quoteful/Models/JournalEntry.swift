@@ -65,3 +65,22 @@ extension Mood {
 }
 
 extension JournalEntry: Equatable {}
+
+extension JournalEntry: Hashable {}
+
+extension Mood {
+    var localizedName: String {
+        switch self {
+        case .angry:
+            String(localized: "angry")
+        case .sad:
+            String(localized: "sad")
+        case .confused:
+            String(localized: "confused")
+        case .neutral:
+            String(localized: "neutral")
+        case .happy:
+            String(localized: "happy")
+        }
+    }
+}
