@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FactoryKit
+import Translation
 
 struct HomeView: View {
     @InjectedObservable(\.homeViewModel) private var viewModel
@@ -131,6 +132,8 @@ struct QuoteView: View {
     
     @Namespace private var animation
     
+    @Environment(\.locale) private var currentLocale
+    
     var body: some View {
         switch viewModel.quoteState {
         case .loading:
@@ -148,17 +151,29 @@ struct QuoteView: View {
             .transition(.identity)
         case .success(let quote):
             VStack {
-                Text(quote.quote)
+                Text(verbatim: quote.quote)
                     .font(.custom("Cochin-BoldItalic", size: 32))
                     .minimumScaleFactor(0.5)
                     .lineLimit(nil)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .matchedGeometryEffect(id: "QuoteText", in: animation)
+                    .translationPresentation(isPresented: $viewModel.translationVisible, text: quote.quote)
                 Text("© " + (quote.author))
                     .font(.custom("Cochin-Italic", size: 24))
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .matchedGeometryEffect(id: "Author", in: animation)
+                
+                if !currentLocale.language.isEquivalent(to: Locale.Language(identifier: "en")) {
+                    Spacer()
+                        .frame(height: 24)
+                    
+                    Button(action: { viewModel.translationVisible.toggle() }) {
+                        Label("translateQuote", systemImage: "translate")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.mutedBeige)
+                }
             }
             .skeleton(isRedacted: false)
             .transition(.identity)

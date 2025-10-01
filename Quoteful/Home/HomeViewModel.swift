@@ -38,6 +38,8 @@ final class HomeViewModel {
         }
     }
     
+    var translationVisible = false
+    
     var sheetPresented = false
     
     var feedbackWarning = false
