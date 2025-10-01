@@ -43,7 +43,7 @@ class HistoryViewModel {
     private let logger = Logger(subsystem: "Quoteful", category: "HistoryViewModel")
     
     // MARK: - States
-    private var allEntries: [JournalEntry] = []
+    private(set) var allEntries: [JournalEntry] = []
     private(set) var groupedEntries: [EntryGroup] = []
     private(set) var sortOption: SortOption = .dateNewest
     
@@ -58,6 +58,7 @@ class HistoryViewModel {
         
         do {
             for try await entries in observation.values(in: dbPool) {
+                guard !Task.isCancelled else { break }
                 self.allEntries = entries
                 applyCurrentSorting()
             }
